@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bears Den Campground · Appalachian Trail, Virginia</title>
+<meta name="description" content="Tent camping on 66 acres, 100 yards off the Appalachian Trail in Clarke County, Virginia. Sunset overlook, historic stone lodge, hot showers.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+:root{
+  --pine:#1d2a20;
+  --moss:#4d6340;
+  --ember:#dd7430;
+  --ember-dark:#c4631f;
+  --stone:#efebe2;
+  --paper:#faf8f3;
+  --line:#e2ddd1;
+  --ink:#1e211c;
+  --muted:#62665b;
+  --r:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font-family:'Figtree',system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.65}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit}
+h1,h2,h3{font-family:'Big Shoulders Display',sans-serif;font-weight:800;line-height:1;text-transform:uppercase;letter-spacing:.01em}
+:focus-visible{outline:3px solid var(--ember);outline-offset:3px;border-radius:6px}
+.wrap{width:min(1140px,92vw);margin-inline:auto}
+section{padding:90px 0}
+.label{display:block;color:var(--ember);font-weight:700;font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.6rem}
+.title{font-size:clamp(2.3rem,5vw,3.4rem);margin-bottom:1rem}
+.intro{color:var(--muted);max-width:560px;margin-bottom:2.5rem}
+.center{text-align:center}.center .intro{margin-inline:auto}
+
+.btn{display:inline-flex;align-items:center;gap:.55rem;padding:.9rem 1.5rem;border-radius:10px;font-weight:700;border:0;cursor:pointer;background:var(--ember);color:#fff;transition:background .25s,transform .25s}
+.btn:hover{background:var(--ember-dark);transform:translateY(-2px)}
+.btn-light{background:#fff;color:var(--pine)}
+.btn-light:hover{background:var(--stone)}
+
+/* fade-in */
+.fade{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+.fade.in{opacity:1;transform:none}
+
+/* header */
+header{position:sticky;top:0;z-index:50;background:rgba(250,248,243,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:70px}
+.logo{display:flex;align-items:center;gap:.6rem;font-family:'Big Shoulders Display';font-weight:800;font-size:1.5rem;text-transform:uppercase;color:var(--pine)}
+.logo i{color:var(--ember)}
+nav ul{display:flex;gap:1.8rem;list-style:none}
+nav a{font-weight:600;font-size:.95rem;color:var(--muted);transition:color .2s}
+nav a:hover{color:var(--ember)}
+header .btn{padding:.6rem 1.1rem}
+.burger{display:none;background:none;border:0;font-size:1.4rem;color:var(--pine);cursor:pointer}
+
+/* hero */
+.hero{position:relative;height:88vh;min-height:520px;display:flex;align-items:flex-end;color:#fff;padding:0}
+.slides{position:absolute;inset:0;overflow:hidden}
+.slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.06);transition:opacity 1.6s ease,transform 7s ease}
+.slide.on{opacity:1;transform:scale(1)}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(20,28,22,.8),rgba(20,28,22,.1) 60%);pointer-events:none}
+.dots{position:absolute;z-index:2;right:4vw;bottom:74px;display:flex;gap:8px}
+.dots button{width:10px;height:10px;border-radius:999px;border:0;background:rgba(255,255,255,.5);cursor:pointer;transition:width .4s ease,background .3s}
+.dots button.on{width:28px;background:#fff}
+.hero .wrap{position:relative;z-index:1;padding-bottom:70px}
+.hero p.loc{display:flex;align-items:center;gap:.5rem;font-weight:600;margin-bottom:1rem;opacity:.9}
+.hero h1{font-size:clamp(3rem,7vw,5.4rem);max-width:800px;margin-bottom:1.2rem}
+.hero .sub{max-width:560px;font-size:1.1rem;opacity:.9;margin-bottom:1.8rem}
+.hero-row{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap}
+.rating{display:flex;align-items:center;gap:.5rem;font-weight:600}
+.rating i{color:#f5b35c}
+
+/* facts */
+.facts{background:#fff;border-bottom:1px solid var(--line);padding:0}
+.facts .wrap{display:grid;grid-template-columns:repeat(5,1fr)}
+.fact{display:flex;align-items:center;gap:.8rem;padding:1.5rem 1rem}
+.fact+.fact{border-left:1px solid var(--line)}
+.fact i{font-size:1.3rem;color:var(--moss)}
+.fact b{display:block;font-size:1rem;line-height:1.2}
+.fact span{font-size:.82rem;color:var(--muted)}
+
+/* about */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.about-img{border-radius:var(--r);overflow:hidden;height:480px}
+.about-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.about-img:hover img{transform:scale(1.04)}
+.about p{color:var(--muted);margin-bottom:1rem}
+.checks{list-style:none;display:grid;gap:.7rem;margin-top:1.5rem}
+.checks li{display:flex;gap:.7rem}
+.checks i{color:var(--ember);margin-top:.3rem}
+
+/* sites */
+.sites{background:var(--stone)}
+.site-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.site{background:#fff;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);transition:transform .3s ease,box-shadow .3s ease;display:flex;flex-direction:column}
+.site:hover{transform:translateY(-5px);box-shadow:0 14px 30px -14px rgba(29,42,32,.35)}
+.site-img{height:210px;overflow:hidden;position:relative}
+.site-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.site:hover .site-img img{transform:scale(1.05)}
+.tag{position:absolute;top:12px;left:12px;background:#fff;color:var(--pine);font-size:.78rem;font-weight:700;padding:.3rem .7rem;border-radius:999px}
+.site-body{padding:1.3rem;display:flex;flex-direction:column;flex:1}
+.site-body h3{font-size:1.8rem;margin-bottom:.4rem}
+.meta{display:flex;gap:1rem;font-size:.86rem;color:var(--muted);margin-bottom:.7rem}
+.meta i{color:var(--moss);margin-right:.3rem}
+.site-body p{font-size:.93rem;color:var(--muted);margin-bottom:1rem;flex:1}
+.site-body .btn{padding:.65rem 1rem;justify-content:center}
+.site.info{background:var(--pine);color:#fff;padding:2rem;justify-content:center;border:0}
+.site.info h3{font-size:1.9rem;margin-bottom:.8rem}
+.site.info p{opacity:.8;margin-bottom:1.4rem;font-size:.95rem}
+.site.info:hover{transform:none;box-shadow:none}
+
+/* amenities */
+.amen-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.amen{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:1.4rem;transition:border-color .25s,transform .25s}
+.amen:hover{border-color:var(--ember);transform:translateY(-3px)}
+.amen i{font-size:1.4rem;color:var(--ember);margin-bottom:.7rem}
+.amen b{display:block}
+.amen span{font-size:.86rem;color:var(--muted)}
+.notes{margin-top:2rem;background:var(--stone);border-radius:var(--r);padding:1.4rem 1.6rem;display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem 2rem;font-size:.93rem;color:var(--muted)}
+.notes li{list-style:none;display:flex;gap:.6rem}
+.notes i{color:var(--moss);margin-top:.3rem}
+
+/* gallery */
+.gallery{background:var(--stone)}
+.g-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.g-item{border:0;padding:0;border-radius:10px;overflow:hidden;aspect-ratio:4/3;cursor:zoom-in;background:var(--line)}
+.g-item:first-child{grid-column:span 2;grid-row:span 2;aspect-ratio:auto}
+.g-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease,opacity .3s}
+.g-item:hover img{transform:scale(1.05);opacity:.9}
+.lb{position:fixed;inset:0;z-index:100;background:rgba(15,20,16,.94);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+.lb.on{opacity:1;visibility:visible}
+.lb img{max-width:88vw;max-height:84vh;border-radius:10px}
+.lb button{position:absolute;width:48px;height:48px;border-radius:50%;border:0;background:rgba(255,255,255,.12);color:#fff;cursor:pointer;font-size:1.1rem;transition:background .2s}
+.lb button:hover{background:var(--ember)}
+.lb .x{top:20px;right:20px}.lb .pv{left:20px}.lb .nx{right:20px}
+
+/* host */
+.host{display:grid;grid-template-columns:340px 1fr;gap:3.5rem;align-items:center}
+.host-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:2rem;text-align:center}
+.host-card img{width:120px;height:120px;border-radius:50%;object-fit:cover;margin:0 auto 1rem;border:4px solid var(--stone)}
+.host-card h3{font-size:2rem}
+.host-card .since{color:var(--muted);font-size:.9rem;margin-bottom:1.3rem}
+.host-stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:.9rem 0;margin-bottom:1.3rem}
+.host-stats b{display:block;font-size:1.3rem;color:var(--pine)}
+.host-stats span{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.host-card .btn{width:100%;justify-content:center}
+.host-text p{color:var(--muted);margin-bottom:1.2rem}
+.quote{border-left:3px solid var(--ember);padding:.3rem 0 .3rem 1.1rem;margin-bottom:1rem}
+.quote p{color:var(--ink);margin:0 0 .2rem;font-style:italic}
+.quote small{color:var(--muted);font-weight:600}
+
+/* reviews */
+.reviews{background:var(--stone)}
+.r-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.review{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:1.5rem;transition:transform .3s,box-shadow .3s}
+.review:hover{transform:translateY(-4px);box-shadow:0 12px 26px -14px rgba(29,42,32,.3)}
+.review .top{display:flex;align-items:center;gap:.7rem;margin-bottom:.8rem}
+.avatar{width:40px;height:40px;border-radius:50%;background:var(--moss);color:#fff;display:grid;place-items:center;font-weight:700}
+.review b{display:block;line-height:1.2}
+.review small{color:var(--muted);font-size:.8rem}
+.review p{font-size:.95rem;color:var(--muted)}
+.more{text-align:center;margin-top:2rem}
+.more a{font-weight:700;color:var(--ember)}
+.more a:hover{text-decoration:underline}
+
+/* nearby */
+.near-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.near{display:flex;align-items:center;gap:1rem;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:1.1rem 1.2rem;transition:border-color .25s}
+.near:hover{border-color:var(--ember)}
+.near i{width:44px;height:44px;border-radius:10px;background:var(--stone);color:var(--moss);display:grid;place-items:center;font-size:1.1rem;flex:none}
+.near b{display:block;line-height:1.3}
+.near span{font-size:.86rem;color:var(--muted)}
+
+/* booking */
+.book{background:var(--pine);color:#fff}
+.book-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:4rem;align-items:start}
+.book .intro{color:rgba(255,255,255,.75)}
+.price{font-size:1.1rem;margin-bottom:1.5rem}
+.price b{font-family:'Big Shoulders Display';font-size:2.6rem;color:#f5a45c}
+.book-list{list-style:none;display:grid;gap:.7rem;color:rgba(255,255,255,.85)}
+.book-list i{color:#f5a45c;width:20px}
+form{background:#fff;color:var(--ink);border-radius:var(--r);padding:2rem;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fld{display:flex;flex-direction:column;gap:.35rem}
+.fld.full{grid-column:1/-1}
+.fld label{font-size:.85rem;font-weight:600}
+.fld input,.fld select,.fld textarea{border:1px solid var(--line);border-radius:10px;padding:.8rem .9rem;background:var(--paper);transition:border-color .2s}
+.fld input:focus,.fld select:focus,.fld textarea:focus{outline:none;border-color:var(--ember)}
+.fld .err{border-color:#c0392b}
+.warn{grid-column:1/-1;display:none;background:#fdf1e7;color:#8a4a17;border-radius:10px;padding:.7rem .9rem;font-size:.88rem}
+.warn.on{display:block}
+form .btn{grid-column:1/-1;justify-content:center;padding:1rem}
+.fine{grid-column:1/-1;text-align:center;font-size:.8rem;color:var(--muted)}
+.done{display:none;background:#fff;color:var(--ink);border-radius:var(--r);padding:3rem 2rem;text-align:center}
+.done.on{display:block}
+.done i{font-size:2.8rem;color:var(--ember);margin-bottom:.8rem}
+.done h3{font-size:2.2rem;margin-bottom:.5rem}
+.done p{color:var(--muted);margin-bottom:1.3rem}
+
+footer{background:#141c16;color:rgba(255,255,255,.6);padding:30px 0;font-size:.9rem}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+footer .logo{color:#fff}
+footer a:hover{color:#fff}
+
+@media (max-width:960px){
+  .facts .wrap{grid-template-columns:repeat(3,1fr)}
+  .fact:nth-child(4){border-left:0}
+  .fact:nth-child(n+4){border-top:1px solid var(--line)}
+  .about,.host,.book-grid{grid-template-columns:1fr;gap:2.5rem}
+  .about-img{height:340px}
+  .site-grid,.r-grid,.near-grid{grid-template-columns:1fr 1fr}
+  .amen-grid,.g-grid{grid-template-columns:repeat(2,1fr)}
+  .host-card{max-width:420px}
+}
+@media (max-width:760px){
+  nav{display:none}
+  nav.open{display:block;position:absolute;top:70px;left:0;right:0;background:var(--paper);border-bottom:1px solid var(--line)}
+  nav.open ul{flex-direction:column;gap:0;padding:.5rem 4vw 1rem}
+  nav.open a{display:block;padding:.8rem 0;font-size:1.05rem}
+  .burger{display:block}
+  header .btn{display:none}
+}
+@media (max-width:600px){
+  section{padding:70px 0}
+  .dots{bottom:auto;top:24px}
+  .facts .wrap{grid-template-columns:1fr 1fr}
+  .fact{border-left:0!important;border-top:1px solid var(--line)}
+  .site-grid,.r-grid,.near-grid,.notes,form{grid-template-columns:1fr}
+  .g-item:first-child{grid-column:span 2;grid-row:auto;aspect-ratio:4/3}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;scroll-behavior:auto!important}
+  .fade{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a href="#top" class="logo"><i class="fa-solid fa-paw"></i> Bears Den</a>
+    <nav id="nav">
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#sites">Sites</a></li>
+        <li><a href="#photos">Photos</a></li>
+        <li><a href="#host">Host</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+      </ul>
+    </nav>
+    <a href="#book" class="btn">Book now</a>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="slides" id="slides"></div>
+  <div class="dots" id="dots"></div>
+  <div class="wrap">
+    <p class="loc"><i class="fa-solid fa-location-dot"></i> Clarke County, Virginia · Appalachian Trail</p>
+    <h1>Bears Den Campground</h1>
+    <p class="sub">Tent camping in the woods, just 100 yards off the Appalachian Trail. Sunset views over the Blue Ridge Mountains, hot showers and a friendly host on site.</p>
+    <div class="hero-row">
+      <a href="#book" class="btn">Check availability <i class="fa-solid fa-arrow-right"></i></a>
+      <span class="rating"><i class="fa-solid fa-thumbs-up"></i> 95% recommend · 626 reviews</span>
+    </div>
+  </div>
+</section>
+
+<!-- FACTS -->
+<section class="facts">
+  <div class="wrap">
+    <div class="fact"><i class="fa-solid fa-campground"></i><div><b>5 tent sites</b><span>From $12 / night</span></div></div>
+    <div class="fact"><i class="fa-solid fa-tree"></i><div><b>66 acres</b><span>Forest land</span></div></div>
+    <div class="fact"><i class="fa-solid fa-person-hiking"></i><div><b>100 yards</b><span>To the A.T.</span></div></div>
+    <div class="fact"><i class="fa-solid fa-users"></i><div><b>Up to 10</b><span>Guests per site</span></div></div>
+    <div class="fact"><i class="fa-solid fa-dog"></i><div><b>Pet friendly</b><span>On leash</span></div></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap about">
+    <div class="about-img fade"><img src="https://hipcamp-res.cloudinary.com/images/f_auto,c_limit,w_1200,q_auto/v1522288807/campground-photos/eokha2efcc6idsid7icn/bears-den-campground-bear-s-den.jpg" alt="Bears Den land" loading="lazy"></div>
+    <div class="fade">
+      <span class="label">About the property</span>
+      <h2 class="title">Camp right on the Appalachian Trail</h2>
+      <p>Bears Den sits on 66 acres of Blue Ridge forest, five miles from the Shenandoah River and 15 miles from Purcellville. It's remote enough to feel wild, but easy to reach by car.</p>
+      <p>The land was once the summer home of an opera singer. Today the 1930s stone house, built from local hand-hammered stone, is where your host lives and runs a hostel for trail hikers.</p>
+      <ul class="checks">
+        <li><i class="fa-solid fa-circle-check"></i> Sunset overlook a 5–10 minute walk from camp</li>
+        <li><i class="fa-solid fa-circle-check"></i> Bear Chase Brewery half a mile across the road</li>
+        <li><i class="fa-solid fa-circle-check"></i> Named 2nd best Hipcamp in Virginia (2023)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SITES -->
+<section class="sites" id="sites">
+  <div class="wrap">
+    <div class="center fade">
+      <span class="label">Campsites</span>
+      <h2 class="title">Choose your site</h2>
+      <p class="intro">All five sites are tent-only, each with a fire pit and picnic table, a short walk from parking.</p>
+    </div>
+    <div class="site-grid" id="siteGrid"></div>
+  </div>
+</section>
+
+<!-- AMENITIES -->
+<section id="amenities">
+  <div class="wrap">
+    <div class="center fade">
+      <span class="label">Amenities</span>
+      <h2 class="title">What's included</h2>
+      <p class="intro">Rustic camping with the essentials close by. Showers and water are up at the lodge.</p>
+    </div>
+    <div class="amen-grid">
+      <div class="amen fade"><i class="fa-solid fa-fire"></i><b>Fire pit</b><span>At every site</span></div>
+      <div class="amen fade"><i class="fa-solid fa-chair"></i><b>Picnic table</b><span>At every site</span></div>
+      <div class="amen fade"><i class="fa-solid fa-shower"></i><b>Hot showers</b><span>At the lodge, until 10 pm</span></div>
+      <div class="amen fade"><i class="fa-solid fa-faucet-drip"></i><b>Drinking water</b><span>Tap at the lodge</span></div>
+      <div class="amen fade"><i class="fa-solid fa-toilet"></i><b>Toilet</b><span>Composting pit toilet</span></div>
+      <div class="amen fade"><i class="fa-solid fa-dog"></i><b>Pets allowed</b><span>Keep on leash</span></div>
+      <div class="amen fade"><i class="fa-solid fa-signal"></i><b>Cell signal</b><span>Good on all carriers</span></div>
+      <div class="amen fade"><i class="fa-solid fa-trash-can"></i><b>Trash bins</b><span>On site</span></div>
+    </div>
+    <ul class="notes fade">
+      <li><i class="fa-solid fa-circle-info"></i> Lodge is open 5 pm – 9 pm</li>
+      <li><i class="fa-solid fa-circle-info"></i> Bring your own cooking gear</li>
+      <li><i class="fa-solid fa-circle-info"></i> No WiFi or electricity at sites</li>
+      <li><i class="fa-solid fa-circle-info"></i> Sites are close together — expect neighbors</li>
+    </ul>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="photos">
+  <div class="wrap">
+    <div class="center fade">
+      <span class="label">Photos</span>
+      <h2 class="title">Take a look around</h2>
+      <p class="intro">Click any photo to see it full size.</p>
+    </div>
+    <div class="g-grid" id="gGrid"></div>
+  </div>
+</section>
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="x" id="lbX" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+  <button class="pv" id="lbP" aria-label="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+  <img id="lbImg" src="" alt="">
+  <button class="nx" id="lbN" aria-label="Next"><i class="fa-solid fa-chevron-right"></i></button>
+</div>
+
+<!-- HOST -->
+<section id="host">
+  <div class="wrap host">
+    <div class="host-card fade">
+      <img src="https://hipcamp-res.cloudinary.com/image/upload/c_fill,f_auto,h_300,w_300/v1524872952/profile/upuu5t6x64yzqsmmzwhj.jpg" alt="Glen B., host">
+      <h3>Glen B.</h3>
+      <p class="since">Host since April 2018 · Lives on site</p>
+      <div class="host-stats">
+        <div><b>626</b><span>Reviews</span></div>
+        <div><b>95%</b><span>Recommend</span></div>
+        <div><b>8 yrs</b><span>Hosting</span></div>
+      </div>
+      <a class="btn" href="#book"><i class="fa-solid fa-envelope"></i> Send Glen a request</a>
+    </div>
+    <div class="host-text fade">
+      <span class="label">Your host</span>
+      <h2 class="title">Meet Glen</h2>
+      <p>Glen lives in the historic stone lodge on the property and also runs it as a hostel for Appalachian Trail hikers. He's around every evening, answers questions quickly, and knows the trails and local history well.</p>
+      <div class="quote"><p>"Glen is an amazing host. Answered all our questions and set us up with point to point rides for our hike!"</p><small>Jayme M.</small></div>
+      <div class="quote"><p>"Host was very responsive and helpful as well — highly recommended overall!"</p><small>Aritra G.</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews" id="reviews">
+  <div class="wrap">
+    <div class="center fade">
+      <span class="label">Reviews</span>
+      <h2 class="title">What campers say</h2>
+      <p class="intro">95% of 1,279 ratings recommend Bears Den.</p>
+    </div>
+    <div class="r-grid" id="rGrid"></div>
+  </div>
+</section>
+
+<!-- NEARBY -->
+<section id="nearby">
+  <div class="wrap">
+    <div class="center fade">
+      <span class="label">Location</span>
+      <h2 class="title">What's nearby</h2>
+      <p class="intro">Exact address is shared after booking.</p>
+    </div>
+    <div class="near-grid">
+      <div class="near fade"><i class="fa-solid fa-person-hiking"></i><div><b>Appalachian Trail</b><span>100 yards</span></div></div>
+      <div class="near fade"><i class="fa-solid fa-mountain-sun"></i><div><b>Bears Den Overlook</b><span>5–10 min walk</span></div></div>
+      <div class="near fade"><i class="fa-solid fa-beer-mug-empty"></i><div><b>Bear Chase Brewery</b><span>0.5 miles</span></div></div>
+      <div class="near fade"><i class="fa-solid fa-water"></i><div><b>Shenandoah River</b><span>5 miles</span></div></div>
+      <div class="near fade"><i class="fa-solid fa-city"></i><div><b>Purcellville</b><span>15 miles</span></div></div>
+      <div class="near fade"><i class="fa-solid fa-tree"></i><div><b>Shenandoah National Park</b><span>About 1 hour</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="book" id="book">
+  <div class="wrap book-grid">
+    <div class="fade">
+      <span class="label">Book your stay</span>
+      <h2 class="title">Reserve a campsite</h2>
+      <p class="intro">Send a request and Glen will confirm your site by email.</p>
+      <p class="price"><b>$12</b> / night starting price</p>
+      <ul class="book-list">
+        <li><i class="fa-solid fa-check"></i> 5 tent sites, 4 to 10 guests each</li>
+        <li><i class="fa-solid fa-check"></i> Pets welcome on leash</li>
+        <li><i class="fa-solid fa-check"></i> Hot showers and water at the lodge</li>
+        <li><i class="fa-solid fa-check"></i> Steps from the Appalachian Trail</li>
+      </ul>
+    </div>
+    <div class="fade">
+      <form id="form" novalidate>
+        <div class="fld full"><label for="site">Campsite</label><select id="site" required></select></div>
+        <div class="fld"><label for="cin">Check-in</label><input type="date" id="cin" required></div>
+        <div class="fld"><label for="cout">Check-out</label><input type="date" id="cout" required></div>
+        <div class="fld"><label for="guests">Guests</label><input type="number" id="guests" min="1" max="10" value="2" required></div>
+        <div class="fld"><label for="pets">Pets</label><select id="pets"><option>No pets</option><option>Bringing a pet</option></select></div>
+        <div class="warn" id="warn"></div>
+        <div class="fld"><label for="name">Full name</label><input type="text" id="name" required autocomplete="name"></div>
+        <div class="fld"><label for="email">Email</label><input type="email" id="email" required autocomplete="email"></div>
+        <div class="fld full"><label for="msg">Message (optional)</label><textarea id="msg" rows="3" placeholder="Arrival time, questions…"></textarea></div>
+        <button type="submit" class="btn">Send booking request</button>
+        <p class="fine">No payment now. Final price confirmed with your booking.</p>
+      </form>
+      <div class="done" id="done">
+        <i class="fa-solid fa-circle-check"></i>
+        <h3>Request sent</h3>
+        <p id="doneTxt">Thanks! Glen will email you shortly to confirm your stay.</p>
+        <button class="btn" id="again">Make another request</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a href="#top" class="logo"><i class="fa-solid fa-paw"></i> Bears Den</a>
+    <span>Shenandoah Retreat, Clarke County, Virginia · © 2026</span>
+    <a href="#book"><i class="fa-solid fa-calendar-check"></i> Book your stay</a>
+  </div>
+</footer>
+
+<script>
+const IMG = (v, id, w = 1200, name = 'bears-den-campground-bear-s-den') =>
+  `https://hipcamp-res.cloudinary.com/images/f_auto,c_limit,w_${w},q_auto/${v}/campground-photos/${id}/${name}.jpg`;
+
+const sites = [
+  {n:1, sleeps:4,  rate:'95%', rev:247, img:['v1693691765','yud51ht8z3trz4ouinc0'], text:'On a gentle wooded slope. Our most-booked site and closest to the sunset overlook.'},
+  {n:2, sleeps:10, rate:'97%', rev:136, img:['v1603931737','hntclx5bsj6fctli8yld'], text:'Our largest site for 8–10 guests. Top rated and great for groups and families.'},
+  {n:3, sleeps:4,  rate:'95%', rev:182, img:['v1567169493','vc8x7kgu4zqki1pwbflx'], text:'A cozy, open site in the woods for up to 4 campers, close to the trail.'},
+  {n:4, sleeps:8,  rate:'95%', rev:154, img:['v1567169491','euh7axpbz1vxdiqo7tdm'], text:'Room for 6–8 guests. Campers call it quiet, clean and secluded.'},
+  {n:5, sleeps:8,  rate:'93%', rev:194, img:['v1685723633','y319dlip3pzdgaptxfgk'], text:'Sleeps 6–8 with lots of trees for hammocks. Tent spots sit on a slight hill.'}
+];
+
+const photos = [
+  ['v1522288810','f3dxknxehehd0eqssntb'],['v1567169488','n6jkv2d9do2xmhza3yyy'],
+  ['v1522288773','ayteefpr6xk9yxty8n7n'],['v1693691765','yud51ht8z3trz4ouinc0'],
+  ['v1522288781','wltpopjlfolz5nt0vfl5'],['v1567169614','os4gjpqqwo6rgohjucav'],
+  ['v1522288793','fk8ewar4rgtvj3tlepvn'],['v1685723633','y319dlip3pzdgaptxfgk'],
+  ['v1522288800','vzyv5upi7sbbhmhcbufr'],['v1536875484','yqiwpenfgscrxknwgvhy'],
+  ['v1603931737','hntclx5bsj6fctli8yld']
+];
+
+const reviews = [
+  ['Nicholas K.','Site 4','Always one of my favorite campsites. Quiet and secluded, clean and incredible views.'],
+  ['Melanie O.','Site 4','Access to the AT, the Raven Rocks hike and Bear Chase Brewing is unbeatable. The grounds are well kept.'],
+  ['Maggie C.','Site 1','Campsite was clean and quiet. A beautiful sunset spot a short walk from the site.'],
+  ['Lauren G.','Site 1','Our second stay with a group of toddlers and everything was as great as the first time.'],
+  ['Serena M.','Site 1','Had a great fire and a great night’s sleep listening to the wind and trees.'],
+  ['Kenton S.','Site 3','Cozy little campground next to great trails with convenient parking.']
+];
+
+/* Hero slideshow */
+const heroImgs = [
+  ['v1522288810','f3dxknxehehd0eqssntb'],['v1522288807','eokha2efcc6idsid7icn'],
+  ['v1522288773','ayteefpr6xk9yxty8n7n'],['v1522288781','wltpopjlfolz5nt0vfl5'],
+  ['v1522288793','fk8ewar4rgtvj3tlepvn'],['v1522288800','vzyv5upi7sbbhmhcbufr']
+];
+const slidesEl = document.getElementById('slides'), dotsEl = document.getElementById('dots');
+heroImgs.forEach((h, i) => {
+  const img = document.createElement('img');
+  img.className = 'slide' + (i === 0 ? ' on' : '');
+  img.src = IMG(h[0], h[1], 1920);
+  img.alt = i === 0 ? 'Sunset over the Shenandoah Valley from Bears Den' : `Bears Den Campground photo ${i + 1}`;
+  if (i > 0) img.loading = 'lazy';
+  slidesEl.appendChild(img);
+  const d = document.createElement('button');
+  d.setAttribute('aria-label', `Show photo ${i + 1}`);
+  if (i === 0) d.className = 'on';
+  d.onclick = () => { goSlide(i); startSlides(); };
+  dotsEl.appendChild(d);
+});
+let slideIdx = 0, slideTimer;
+function goSlide(i){
+  slidesEl.children[slideIdx].classList.remove('on'); dotsEl.children[slideIdx].classList.remove('on');
+  slideIdx = i;
+  slidesEl.children[slideIdx].classList.add('on'); dotsEl.children[slideIdx].classList.add('on');
+}
+function startSlides(){
+  clearInterval(slideTimer);
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  slideTimer = setInterval(() => goSlide((slideIdx + 1) % heroImgs.length), 5000);
+}
+startSlides();
+
+/* Sites */
+const siteGrid = document.getElementById('siteGrid');
+siteGrid.innerHTML = sites.map(s => `
+  <article class="site fade">
+    <div class="site-img"><img src="${IMG(s.img[0], s.img[1], 800)}" alt="Site ${s.n}" loading="lazy"><span class="tag">Sleeps ${s.sleeps}</span></div>
+    <div class="site-body">
+      <h3>Site ${s.n}</h3>
+      <div class="meta"><span><i class="fa-solid fa-thumbs-up"></i>${s.rate}</span><span><i class="fa-solid fa-comment"></i>${s.rev} reviews</span></div>
+      <p>${s.text}</p>
+      <button class="btn" data-site="${s.n}">Book Site ${s.n}</button>
+    </div>
+  </article>`).join('') + `
+  <article class="site info fade">
+    <h3>Coming with a big group?</h3>
+    <p>Book more than one site, or all five for the whole campground to yourselves.</p>
+    <a href="#book" class="btn btn-light">Send a request</a>
+  </article>`;
+siteGrid.addEventListener('click', e => {
+  const b = e.target.closest('[data-site]'); if (!b) return;
+  siteSel.value = b.dataset.site; check();
+  document.getElementById('book').scrollIntoView({behavior:'smooth'});
+});
+
+/* Gallery + lightbox */
+const gGrid = document.getElementById('gGrid');
+photos.forEach((p, i) => {
+  const b = document.createElement('button');
+  b.className = 'g-item fade';
+  b.setAttribute('aria-label', `Open photo ${i + 1}`);
+  b.innerHTML = `<img src="${IMG(p[0], p[1], i === 0 ? 1200 : 700)}" alt="Bears Den photo ${i + 1}" loading="lazy">`;
+  b.onclick = () => openLb(i);
+  gGrid.appendChild(b);
+});
+const lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg');
+let cur = 0;
+const show = () => { lbImg.src = IMG(photos[cur][0], photos[cur][1], 1920); lbImg.alt = `Photo ${cur + 1}`; };
+function openLb(i){ cur = i; show(); lb.classList.add('on'); document.body.style.overflow = 'hidden'; }
+function closeLb(){ lb.classList.remove('on'); document.body.style.overflow = ''; }
+const move = d => { cur = (cur + d + photos.length) % photos.length; show(); };
+document.getElementById('lbX').onclick = closeLb;
+document.getElementById('lbP').onclick = () => move(-1);
+document.getElementById('lbN').onclick = () => move(1);
+lb.onclick = e => { if (e.target === lb) closeLb(); };
+addEventListener('keydown', e => {
+  if (!lb.classList.contains('on')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowRight') move(1);
+  if (e.key === 'ArrowLeft') move(-1);
+});
+
+/* Reviews */
+document.getElementById('rGrid').innerHTML = reviews.map(r => `
+  <div class="review fade">
+    <div class="top"><span class="avatar">${r[0][0]}</span><div><b>${r[0]}</b><small>${r[1]}</small></div></div>
+    <p>${r[2]}</p>
+  </div>`).join('');
+
+/* Mobile menu */
+const burger = document.getElementById('burger'), nav = document.getElementById('nav');
+burger.onclick = () => {
+  const o = nav.classList.toggle('open');
+  burger.setAttribute('aria-expanded', o);
+  burger.innerHTML = `<i class="fa-solid fa-${o ? 'xmark' : 'bars'}"></i>`;
+};
+nav.querySelectorAll('a').forEach(a => a.onclick = () => { nav.classList.remove('open'); burger.innerHTML = '<i class="fa-solid fa-bars"></i>'; });
+
+/* Booking form */
+const siteSel = document.getElementById('site'), cin = document.getElementById('cin'), cout = document.getElementById('cout'),
+      guests = document.getElementById('guests'), warn = document.getElementById('warn');
+siteSel.innerHTML = '<option value="">Select a site</option>' + sites.map(s => `<option value="${s.n}">Site ${s.n} (sleeps ${s.sleeps})</option>`).join('');
+const iso = d => d.toISOString().slice(0, 10);
+cin.min = iso(new Date());
+function check(){
+  const s = sites.find(x => x.n == siteSel.value), g = +guests.value;
+  if (cin.value) { const d = new Date(cin.value); d.setDate(d.getDate() + 1); cout.min = iso(d); }
+  let msg = '';
+  if (s && g > s.sleeps) msg = `Site ${s.n} sleeps up to ${s.sleeps}. Try Site 2 (up to 10) or book two sites.`;
+  else if (cin.value && cout.value && cout.value <= cin.value) msg = 'Check-out must be after check-in.';
+  warn.textContent = msg; warn.classList.toggle('on', !!msg);
+  return !msg;
+}
+[siteSel, cin, cout, guests].forEach(el => el.addEventListener('change', check));
+document.getElementById('form').addEventListener('submit', e => {
+  e.preventDefault();
+  let firstBad = null;
+  e.target.querySelectorAll('[required]').forEach(el => {
+    const bad = !el.value || (el.type === 'email' && !/^\S+@\S+\.\S+$/.test(el.value));
+    el.classList.toggle('err', bad);
+    if (bad && !firstBad) firstBad = el;
+  });
+  if (firstBad) { firstBad.focus(); return; }
+  if (!check()) return;
+  const nights = Math.round((new Date(cout.value) - new Date(cin.value)) / 864e5);
+  document.getElementById('doneTxt').textContent =
+    `Thanks, ${document.getElementById('name').value.split(' ')[0]}! Your request for Site ${siteSel.value} (${nights} night${nights > 1 ? 's' : ''}) has been sent. Glen will email you shortly to confirm.`;
+  e.target.style.display = 'none';
+  document.getElementById('done').classList.add('on');
+});
+document.getElementById('again').onclick = () => {
+  const f = document.getElementById('form'); f.reset(); f.style.display = '';
+  document.getElementById('done').classList.remove('on'); check();
+};
+
+/* Fade-in on scroll */
+const io = new IntersectionObserver(es => es.forEach(en => {
+  if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+}), {threshold:.1});
+document.querySelectorAll('.fade').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
